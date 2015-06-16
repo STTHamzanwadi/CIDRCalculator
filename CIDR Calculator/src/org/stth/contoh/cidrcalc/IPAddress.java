@@ -2,12 +2,12 @@ package org.stth.contoh.cidrcalc;
 
 public class IPAddress {
 	private String address;
-	private int netmask;
+	private int prefixMask;
 	
-	public IPAddress(String address, int netmask) {
+	public IPAddress(String address, int prefix) {
 		super();
 		this.address = address;
-		this.netmask = netmask;
+		this.prefixMask = prefix;
 	}
 	public String getBinaryAddress(){
 		return getBinaryAddress(address);
@@ -78,10 +78,10 @@ public class IPAddress {
 	}
 	public String getBinaryNetmask(){
 		StringBuilder sb = new StringBuilder(getBinaryAddress(address));
-		for (int i = netmask; i < 32; i++) {
+		for (int i = prefixMask; i < 32; i++) {
 			sb.setCharAt(i, '0');
 		}
-		for (int i = 0; i < netmask; i++) {
+		for (int i = 0; i < prefixMask; i++) {
 			sb.setCharAt(i, '1');
 		}
 		return sb.toString();
@@ -91,7 +91,7 @@ public class IPAddress {
 	}
 	public String getBinaryFirstHost(){
 		StringBuilder sb = new StringBuilder(getBinaryAddress(address));
-		for (int i = netmask; i < 31; i++) {
+		for (int i = prefixMask; i < 31; i++) {
 			sb.setCharAt(i, '0');
 		}
 		sb.setCharAt(31, '1');
@@ -102,7 +102,7 @@ public class IPAddress {
 	}
 	public String getBinaryLastHost(){
 		StringBuilder sb = new StringBuilder(getBinaryAddress(address));
-		for (int i = netmask; i < 31; i++) {
+		for (int i = prefixMask; i < 31; i++) {
 			sb.setCharAt(i, '1');
 		}
 		sb.setCharAt(31, '0');
@@ -113,7 +113,7 @@ public class IPAddress {
 	}
 	public String getBinaryBroadcast(){
 		StringBuilder sb = new StringBuilder(getBinaryAddress(address));
-		for (int i = netmask; i < 32; i++) {
+		for (int i = prefixMask; i < 32; i++) {
 			sb.setCharAt(i, '1');
 		}
 		return sb.toString();
